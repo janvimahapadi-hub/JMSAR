@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="color-scheme" content="dark"/>
+  <title>JMSAR | Earth Observation Research</title>
+  <link rel="stylesheet" href="/assets/styles.css"/>
+  <script src="/assets/app.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <aside class="rail">
+      <div class="mark" aria-label="JMSAR">J<span>·</span></div>
+      <div class="rail-buttons"><button class="rail-button active" title="Study" aria-label="Study">◫</button><button class="rail-button" id="rail-method" title="Methods" aria-label="Methods">≋</button><button class="rail-button" id="rail-about" title="About" aria-label="About">ⓘ</button></div>
+      <div class="rail-footer">2021</div>
+    </aside>
+    <main class="main">
+      <header class="top">
+        <div class="brand"><div class="brand-name">JMSAR <span>/</span> OBSERVATORY</div><div class="brand-sub">RADAR LAND-COVER STUDY</div></div>
+        <div class="top-right"><span class="top-chip">SENTINEL-1</span><span class="top-chip">JAN — DEC 2021</span><div id="status" class="status"><i></i><span>Checking engine</span></div></div>
+      </header>
+      <div class="content">
+        <div class="heading"><div><div class="eyebrow"><span class="rule"></span> RESEARCH WORKSPACE / 01</div><h1>The landscape, <em>over time.</em></h1><p>A retrospective look at land-cover classification from twelve months of satellite radar observations.</p></div><div class="year-seal"><div>STUDY<br/>PERIOD</div><strong>2021</strong></div></div>
+        <section class="workspace">
+          <div class="left-panel">
+            <div class="panel-head"><div><span class="overline">01 / SPATIAL EXPLORER</span><h2 id="site-name">Mannheim, Germany</h2><div class="subtle" id="coordinates">49.4875° N · 8.4660° E · 10 m / pixel</div></div><div class="head-action"><button class="outline" id="new-location">+ New location</button></div></div>
+            <div class="map-stage" id="map-stage">
+              <div class="map-label top-left"><span class="live-dot"></span> GEOGRAPHIC CLASSIFICATION · <span id="map-month-label">JAN 2021</span></div>
+              <div class="map-label top-right">256 × 256 px</div>
+              <div class="map-surround">
+                <div id="map-frame" class="map-frame"><div id="radar-background" class="radar-image"></div><div id="map-foreground" class="class-image"></div><div class="crosshair h"></div><div class="crosshair v"></div><div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div></div>
+              </div>
+              <div class="map-bottom"><div class="map-scale">0 <span class="scale-line"></span> 2.56 km</div><div class="map-hint">Predicted classes · Not ground truth</div></div>
+            </div>
+            <div class="controls">
+              <div><div class="overline">MONTHLY OBSERVATION</div><div class="month-pick" id="month-pick" role="group" aria-label="2021 month selector"></div></div>
+              <div class="opacity-area"><div class="opacity-label"><span>Radar / classification blend</span><strong id="blend-percent">75%</strong></div><input id="blend" type="range" min="0" max="100" step="5" value="75" aria-label="Classification layer opacity"/><div class="blend-ends"><span>SAR RADAR</span><span>CLASS MAP</span></div></div>
+            </div>
+          </div>
+          <aside class="insights">
+            <div class="insight-head"><div class="overline">02 / MODEL INTERPRETATION</div><span class="small-number">9 CLASSES</span></div>
+            <div class="insight-title">Land-cover composition</div><div class="insight-sub">Share of the study tile · <span id="share-month">JAN 2021</span></div>
+            <div id="composition" class="composition"><div class="placeholder">Loading class statistics…</div></div>
+            <div class="insight-divider"></div>
+            <div class="overline">CLASS DISTRIBUTION THROUGH 2021</div>
+            <div class="series-head"><strong id="series-class">Built-up land</strong><span id="series-value">—</span></div>
+            <div id="series" class="series"></div>
+            <div class="insight-divider"></div>
+            <div class="insight-metrics"><div><span class="metric-caption">Annual dominant class</span><div id="dominant-class" class="metric-value">—</div></div><div><span class="metric-caption">Largest adjacent-month share shift</span><div id="largest-shift" class="metric-value">—</div><span class="metric-foot" id="shift-period"></span></div></div>
+            <div class="disclaimer"><span>!</span> Model predictions can be inaccurate. Month-to-month composition shifts are not verified physical land-cover changes.</div>
+          </aside>
+        </section>
+        <section class="bottom-grid">
+          <article class="secondary-card"><div class="overline">03 / STUDY LOGIC</div><h3>From radar signal to mapped class</h3><div class="steps"><div><small>01</small><b>ACQUIRE</b><span>Sentinel-1 · VV / VH</span></div><div class="step-connector"></div><div><small>02</small><b>PREPROCESS</b><span>Monthly calibrated composites</span></div><div class="step-connector"></div><div><small>03</small><b>INFER</b><span>Frozen ResNet34 U-Net</span></div><div class="step-connector"></div><div><small>04</small><b>INTERPRET</b><span>Class shares & review</span></div></div></article>
+          <article class="secondary-card quality"><div class="overline">04 / EVIDENCE DESK</div><h3>Review before concluding</h3><p id="quality-note">The example is a retrospective model output. Review coverage, reference support and seasonal variability before interpreting any changes.</p><button id="download-record" class="text-button">Download saved results <span>↗</span></button></article>
+        </section>
+        <footer class="footer"><span>JMSAR / 2021 RESEARCH INTERFACE</span><span>MODEL & DATA PIPELINE: <a href="https://github.com/keyurck7/SARScope" target="_blank" rel="noreferrer">SARScope · Keyur Chaudhari</a> · <a href="https://github.com/janvimahapadi-hub/JMSAR" target="_blank" rel="noreferrer">VIEW SOURCE</a></span></footer>
+      </div>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <dialog id="location-dialog"><form id="location-form" method="dialog"><div class="dialog-top"><div><div class="overline">NEW RETROSPECTIVE ANALYSIS</div><h2>Choose a study location</h2></div><button type="button" id="close-dialog" class="close" aria-label="Close">×</button></div><p>All requests use January–December 2021. A real Sentinel-1 download and verified model checkpoint are required; no predictions are simulated.</p><div class="fields"><label>Latitude<input required id="latitude" type="number" step="any" min="-79" max="83" value="49.4875"/></label><label>Longitude<input required id="longitude" type="number" step="any" min="-179" max="179" value="8.4660"/></label></div><label>Earth Engine project ID<input required id="project" type="text" minlength="3" maxlength="100" placeholder="your-ee-project"/></label><div class="dialog-period"><span>FIXED TIME WINDOW</span><strong>01 JAN 2021 — 31 DEC 2021</strong></div><button type="submit" class="primary">Run 2021 analysis <span>↗</span></button><div id="job-status" class="job-status"></div></form></dialog>
+  <dialog id="about-dialog"><div class="info-body"><button class="close info-close" aria-label="Close" type="button">×</button><div class="overline">ABOUT THE RESEARCH</div><h2>What this system measures</h2><p>The interface inspects monthly land-cover predictions derived from Sentinel-1 radar observations and a frozen nine-class segmentation model. It is a retrospective 2021 study, not a live satellite feed or surveyed ground-truth detector.</p><p><strong>Source attribution:</strong> SARScope, developed by Keyur Chaudhari, provides the trained model, original data processing and saved results. This study interface adds a distinct view of class composition and changes; individual contributions must be described accurately.</p><p>Model benchmarks: 74.17% overall accuracy and 42.39% mean IoU on held-out Dynamic World-derived weak labels. These do not establish independent performance in a new location.</p><button class="primary info-close" type="button">Return to workspace</button></div></dialog>
+</body>
+</html>
